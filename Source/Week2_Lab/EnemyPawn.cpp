@@ -156,8 +156,16 @@ void AEnemyPawn::State_Confused_OnEnter() {}
 void AEnemyPawn::State_Confused_OnTick(float f_DeltaTime)
 {
 	// Get all enemies in world
+	// I TRIED TO ITERATE BUT CANNOT PLS FIX
 	TArray<AEnemyPawn*> EnemyList;
-
+	for (TActorIterator<AEnemyPawn> EnemyItr(GetWorld()); EnemyItr; ++EnemyItr)
+	{
+		// Check if EnemyIter is not this enemy
+		if (EnemyItr != this)
+		{
+			EnemyList.Add(Cast<AEnemyPawn>(*EnemyItr));
+		}
+	}
 	
 	// Get nearest enemy
 	float distanceToThis;
